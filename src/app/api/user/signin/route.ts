@@ -10,11 +10,9 @@ export async function POST(req: NextRequest) {
     await connectToDB(process.env.MONGO_URI as string);
     const cookieStore = cookies();
 
-    // ❌ MISSING `await`, NOW FIXED ✅
     const userAuth = await authMiddleware(req);
     console.log("userAuth:", userAuth);
 
-    // ✅ If `authMiddleware` returns a `NextResponse`, return it to stop execution
     if (userAuth instanceof NextResponse) return userAuth;
 
     const reqBody = await req.json();
@@ -30,6 +28,7 @@ export async function POST(req: NextRequest) {
     try {
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
+            console.log(existingUser);
             return NextResponse.json({ msg: "User not found", status: false });
         }
 
@@ -45,18 +44,18 @@ export async function POST(req: NextRequest) {
             role: existingUser.role
         };
 
-        const token = jwt.sign(payload, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+        const token = jwt.sign(payload, process.env.JWT_SECRET as string);
 
         existingUser.token = token;
         await existingUser.save();
 
-        cookieStore.set('token', token); // ✅ Save token in cookies
+        (await cookieStore).set('token', token);
 
         return NextResponse.json({
             msg: "User logged in successfully",
             status: true,
             user: existingUser,
-            token: token,  // ✅ Return token for frontend
+            token: token,
         });
 
     } catch (err) {

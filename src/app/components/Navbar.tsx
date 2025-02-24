@@ -1,32 +1,27 @@
 "use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../context/AppContext";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const { user, setUser } = useAppContext();
-    // console.log(user);
+    const { user } = useAppContext();
+    console.log("user : ", user);
     const router = useRouter();
-
-
 
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-md">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
-                    <div className="text-2xl font-bold text-gray-800 dark:text-white">
-                        <Link href="/">MyBrand</Link>
-                    </div>
+                    <div className="text-2xl font-bold text-gray-800 dark:text-white cursor-pointer" onClick={() => router.push("/")}>MyBrand</div>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-6">
-                        <Link href="/" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Home</Link>
-                        <Link href="/about" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">About</Link>
-                        <Link href="/services" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Services</Link>
-                        <Link href="/contact" className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</Link>
+                        <button onClick={() => router.push("/")} className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Home</button>
+                        <button onClick={() => router.push("/about")} className="text-gray-700 dark:text-gray-300 hover:text-blue-500">About</button>
+                        <button onClick={() => router.push("/services")} className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Services</button>
+                        <button onClick={() => router.push("/contact")} className="text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</button>
                     </div>
 
                     {/* Profile Section */}
@@ -40,9 +35,10 @@ export default function Navbar() {
                             </button>
                         </div>
                     ) : (
-                        <Link href="/login" className="hidden md:block text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                        <button onClick={() => router.push("/u/login")} className="text-white dark:text-gray-300 hover:text-blue-500">
                             Login
-                        </Link>
+                        </button>
+
                     )}
 
                     {/* Mobile Menu Button */}
@@ -65,10 +61,10 @@ export default function Navbar() {
             {/* Mobile Menu */}
             {isOpen && (
                 <div className="md:hidden space-y-2 px-4 pb-4">
-                    <Link href="/" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Home</Link>
-                    <Link href="/about" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">About</Link>
-                    <Link href="/services" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Services</Link>
-                    <Link href="/contact" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</Link>
+                    <button onClick={() => router.push("/")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Home</button>
+                    <button onClick={() => router.push("/about")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">About</button>
+                    <button onClick={() => router.push("/services")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Services</button>
+                    <button onClick={() => router.push("/contact")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</button>
                     {user ? (
                         <button
                             onClick={() => router.push(`/u/${user.id}`)}
@@ -77,9 +73,9 @@ export default function Navbar() {
                             {user.name}
                         </button>
                     ) : (
-                        <Link href="/login" className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                        <button onClick={() => router.push("/u/login")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
                             Login
-                        </Link>
+                        </button>
                     )}
                 </div>
             )}

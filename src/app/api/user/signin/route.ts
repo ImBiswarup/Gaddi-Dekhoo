@@ -10,10 +10,10 @@ export async function POST(req: NextRequest) {
     await connectToDB(process.env.MONGO_URI as string);
     const cookieStore = cookies();
 
-    const userAuth = await authMiddleware(req);
-    console.log("userAuth:", userAuth);
+    // const userAuth = await authMiddleware(req);
+    // console.log("userAuth:", userAuth);
 
-    if (userAuth instanceof NextResponse) return userAuth;
+    // if (userAuth instanceof NextResponse) return userAuth;
 
     const reqBody = await req.json();
     const { email, password } = reqBody;

@@ -14,7 +14,7 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between h-16 items-center">
                     {/* Logo */}
-                    <div className="text-2xl font-bold text-gray-800 dark:text-white cursor-pointer" onClick={() => router.push("/")}>MyBrand</div>
+                    <div className="text-2xl font-bold text-gray-800 dark:text-white cursor-pointer" onClick={() => router.push("/")}>Gaddi Dekhooo</div>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:flex space-x-6">
@@ -28,7 +28,7 @@ export default function Navbar() {
                     {user ? (
                         <div className="hidden md:flex items-center space-x-4">
                             <button
-                                onClick={() => router.push(`/u/${user.id}`)}
+                                onClick={() => router.push(`/u/${user._id}`)}
                                 className="text-gray-700 dark:text-gray-300 hover:text-blue-500 font-medium"
                             >
                                 {user.name}
@@ -67,7 +67,7 @@ export default function Navbar() {
                     <button onClick={() => router.push("/contact")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</button>
                     {user ? (
                         <button
-                            onClick={() => router.push(`/u/${user.id}`)}
+                            onClick={() => router.push(`/u/${user._id}`)}
                             className="block text-gray-700 dark:text-gray-300 hover:text-blue-500"
                         >
                             {user.name}

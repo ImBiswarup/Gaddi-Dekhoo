@@ -1,36 +1,37 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import { AppProvider } from '@/app/context/AppContext'; // Import AppProvider
+import { AppProvider } from "@/app/context/AppContext";
+import Navbar from "./components/Navbar";
+import SessionWrapper from "@/app/components/SessionWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const mono = Roboto_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Gaddi Dekhooo",
-  description: "This is a fullstack application to get or lend you a car in a pocket friendly budget.",
+  description: "This is a fullstack application to get or lend you a car in a pocket-friendly budget.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <AppProvider>
-          {children}
-        </AppProvider>
+      <body className={`${inter.variable} ${mono.variable} antialiased`}>
+        <SessionWrapper>
+          <AppProvider>
+            <Navbar />
+            {children}
+          </AppProvider>
+        </SessionWrapper>
       </body>
     </html>
   );

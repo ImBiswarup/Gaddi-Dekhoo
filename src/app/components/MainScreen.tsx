@@ -137,7 +137,7 @@ export default function MainScreen() {
   }, [selectedLocation]);
 
   useEffect(() => {
-    if (carDetails.length > 0 && distance) {
+    if (carDetails.length > 0 && distance) {   
       const priceAmount = parseFloat(carDetails[0].cost);
       setTotalAmount(priceAmount * distance);
     }

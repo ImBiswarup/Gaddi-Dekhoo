@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
-import { redirect } from "next/dist/server/api-utils";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 
@@ -71,61 +70,61 @@ export const AppProvider = ({ children }) => {
             name: "BMW",
             driver: "Test Driver",
             cost: "5$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Tesla",
             driver: "John Doe",
             cost: "10$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Mercedes",
             driver: "Jane Smith",
             cost: "8$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Audi",
             driver: "Alice Brown",
             cost: "6$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Toyota",
             driver: "Bob Johnson",
             cost: "4$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Honda",
             driver: "Charlie Davis",
             cost: "4.5$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Nissan",
             driver: "Derek Fisher",
             cost: "5.5$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Hyundai",
             driver: "Emily Green",
             cost: "6$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Chevrolet",
             driver: "Frank Harris",
             cost: "7$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             name: "Kia",
             driver: "Grace Lee",
             cost: "5$",
-            imageUrl: "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         }
     ];
     
@@ -133,52 +132,52 @@ export const AppProvider = ({ children }) => {
         {
             "riderName": "Alice",
             "carName": "BMW",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Bob",
             "carName": "Tesla",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Charlie",
             "carName": "Mercedes",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "David",
             "carName": "Audi",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Eve",
             "carName": "Lexus",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Frank",
             "carName": "Honda",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Grace",
             "carName": "Toyota",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Heidi",
             "carName": "Ford",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Ivan",
             "carName": "Chevrolet",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         },
         {
             "riderName": "Judy",
             "carName": "Volkswagen",
-            "imageUrl": "https://res.cloudinary.com/djrdw0sqz/image/upload/v1725100842/myImg_q3lyty.jpg"
+            "imageUrl": "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         }
     ];
 

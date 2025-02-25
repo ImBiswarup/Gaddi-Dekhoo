@@ -28,7 +28,7 @@ export default function Navbar() {
                     {user ? (
                         <div className="hidden md:flex items-center space-x-4">
                             <button
-                                onClick={() => router.push(`/u/${user._id}`)}
+                                onClick={() => router.push(`/u/${user.id}`)}
                                 className="text-gray-700 dark:text-gray-300 hover:text-blue-500 font-medium"
                             >
                                 {user.name}

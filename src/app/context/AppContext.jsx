@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const AppContext = createContext();
 export const AppProvider = ({ children }) => {
@@ -15,6 +16,14 @@ export const AppProvider = ({ children }) => {
     const [distance, setDistance] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [loading, setLoading] = useState(false);
+
+
+  const { data: session } = useSession()
+  console.log(session);
+
+  useEffect(() => { setUser(session?.user) }, [session])
+
+//   console.log(user);
 
     const router = useRouter()
 
@@ -127,7 +136,7 @@ export const AppProvider = ({ children }) => {
             imageUrl: "https://images.pexels.com/photos/116675/pexels-photo-116675.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         }
     ];
-    
+
     const allRider = [
         {
             "riderName": "Alice",
@@ -193,7 +202,7 @@ export const AppProvider = ({ children }) => {
             distance, setDistance,
             totalAmount, setTotalAmount,
             carDetails, allRider,
-            loading, setLoading
+            loading, setLoading, session
         }}>
             {children}
         </AppContext.Provider>

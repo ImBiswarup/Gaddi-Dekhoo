@@ -2,12 +2,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../context/AppContext";
+import AuthButton from "./Authbutton";
+import Image from "next/image";
 
 export default function Navbar() {
+    const { user } = useAppContext()
     const [isOpen, setIsOpen] = useState(false);
-    const { user } = useAppContext();
-    console.log("user : ", user);
     const router = useRouter();
+
+    console.log(user);
 
     return (
         <nav className="bg-white dark:bg-gray-900 shadow-md">
@@ -29,14 +32,14 @@ export default function Navbar() {
                         <div className="hidden md:flex items-center space-x-4">
                             <button
                                 onClick={() => router.push(`/u/${user.id}`)}
-                                className="text-gray-700 dark:text-gray-300 hover:text-blue-500 font-medium"
+                                className="text-gray-700 dark:text-gray-300 font-medium flex items-center gap-x-2"
                             >
-                                {user.name}
+                                <Image className="rounded-full" height={10} width={35} src={user?.image} alt={user?.name} />  {user.name}
                             </button>
                         </div>
                     ) : (
-                        <button onClick={() => router.push("/u/login")} className="text-white dark:text-gray-300 hover:text-blue-500">
-                            Login
+                        <button onClick={() => router.push("/u/login")} className="text-white dark:text-gray-300">
+                            <AuthButton />
                         </button>
 
                     )}
@@ -68,13 +71,13 @@ export default function Navbar() {
                     {user ? (
                         <button
                             onClick={() => router.push(`/u/${user._id}`)}
-                            className="block text-gray-700 dark:text-gray-300 hover:text-blue-500"
+                            className="block text-gray-700 dark:text-gray-300"
                         >
                             {user.name}
                         </button>
                     ) : (
                         <button onClick={() => router.push("/u/login")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
-                            Login
+                            <AuthButton />
                         </button>
                     )}
                 </div>

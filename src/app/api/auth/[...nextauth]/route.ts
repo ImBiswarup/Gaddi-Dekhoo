@@ -1,58 +1,61 @@
-import NextAuth, { AuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import TwitterProvider from "next-auth/providers/twitter";
-import FacebookProvider from "next-auth/providers/facebook";
-import DiscordProvider from "next-auth/providers/discord";
-import { JWT } from "next-auth/jwt";
-import { Session } from "next-auth";
-
-export const authOptions: AuthOptions = {
+import GitHubProvider from "next-auth/providers/github";
+import connectToDB from "@/DB/connection";
+import User from "@/model/user";
+// Define NextAuth Options
+export const authOptions: NextAuthOptions = {
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
-    }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    // TwitterProvider({
-    //   clientId: process.env.TWITTER_CLIENT_ID as string,
-    //   clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
-    //   version: "2.0",
-    // }),
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_CLIENT_ID as string,
-    //   clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string,
-    // }),
-    // DiscordProvider({
-    //   clientId: process.env.DISCORD_CLIENT_ID as string,
-    //   clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
-    // }),
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID!,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
+    async signIn({ user, account }) {
+      await connectToDB(process.env.MONGO_URI!);
+
+      try {
+        let existingUser = await User.findOne({ email: user.email });
+
+        if (!existingUser) {
+          existingUser = await User.create({
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            provider: account?.provider,
+          });
+        }
+
+        return true; // Allow sign-in
+      } catch (error) {
+        console.error("Error storing user:", error);
+        return false; // Deny sign-in on error
       }
-      return token;
     },
-    async session({ session, token }: { session: Session; token: JWT }) {
-      if (session.user) {
-        session.user.id = token.id as string;
+    async session({ session }) {
+      await connectToDB(process.env.MONGO_URI!);
+      const dbUser = await User.findOne({ email: session.user.email });
+
+      if (dbUser) {
+        session.user.id = dbUser._id.toString();
+        (session.user as any).provider = dbUser.provider; // TypeScript Fix
       }
+
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: process.env.NEXTAUTH_SECRET, // Important for security
   pages: {
-    signIn: "/auth/signin",
-  },
-  session: {
-    strategy: "jwt",
+    signIn: "",
+    error: "/auth/error", // Error page
   },
 };
 
+// Export NextAuth Handlers for App Router
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

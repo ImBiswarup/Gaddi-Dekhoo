@@ -3,7 +3,6 @@ import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
 import connectToDB from "@/DB/connection";
 import User from "@/model/user";
-// Define NextAuth Options
 export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
@@ -31,10 +30,10 @@ export const authOptions: NextAuthOptions = {
           });
         }
 
-        return true; // Allow sign-in
+        return true;
       } catch (error) {
         console.error("Error storing user:", error);
-        return false; // Deny sign-in on error
+        return false;
       }
     },
     async session({ session }) {
@@ -43,17 +42,17 @@ export const authOptions: NextAuthOptions = {
 
       if (dbUser) {
         session.user.id = dbUser._id.toString();
-        (session.user as any).provider = dbUser.provider; // TypeScript Fix
+        (session.user as any).provider = dbUser.provider;
       }
 
       return session;
     },
   },
   secret: process.env.NEXTAUTH_SECRET, // Important for security
-  pages: {
-    signIn: "",
-    error: "/auth/error", // Error page
-  },
+  // pages: {
+  //   signIn: "",
+  //   error: "/auth/error", // Error page
+  // },
 };
 
 // Export NextAuth Handlers for App Router

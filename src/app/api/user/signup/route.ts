@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { cookies } from 'next/headers'
 import connectToDB from "../../../../DB/connection";
-import { User } from "../../../../model/user";
+import User from "../../../../model/user";
 
 export async function POST(req: NextRequest) {
-    await connectToDB(process.env.MONGO_URI as string); 
+    await connectToDB(process.env.MONGO_URI as string);
     const cookieStore = await cookies()
     const reqBody = await req.json();
     const { name, email, password, role } = reqBody;
@@ -19,14 +19,14 @@ export async function POST(req: NextRequest) {
 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        
+
         const createdUser = await User.create({
             name,
             email,
             password: hashedPassword,
             role,
         });
-        
+
         return NextResponse.json({
             msg: "User created successfully",
             status: true,

@@ -1,14 +1,33 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppContext } from "../context/AppContext";
 import AuthButton from "./Authbutton";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Navbar() {
-    const { user } = useAppContext()
+    const { user, getToken } = useAppContext()
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        getToken()
+    }, [])
+
+    // useEffect(() => {
+    //     const fetchToken = async () => {
+    //         const res = await axios.get("/api/get-token");
+    //         // const data = await res.json();
+
+    //         if (res.data.token) {
+    //             console.log(res.data.token);
+    //         }
+    //     };
+
+    //     fetchToken();
+    // }, []);
+
 
     console.log(user);
 
@@ -38,7 +57,7 @@ export default function Navbar() {
                             </button>
                         </div>
                     ) : (
-                        <button onClick={() => router.push("/u/login")} className="text-white dark:text-gray-300">
+                        <button onClick={() => router.push("/u/login")} className={`text-white dark:text-gray-300 ${isOpen ? "hidden" : "block"} bg-blue-500 px-4 py-2 rounded-md`}>
                             <AuthButton />
                         </button>
 

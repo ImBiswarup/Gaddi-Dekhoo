@@ -14,14 +14,8 @@ export default function UserProfile() {
         router.push("/profile/edit");
     };
     const handleSignout = async () => {
-        // const cookieStore = await cookies()
-
-        // const token = cookieStore.getAll()
-        // console.log(token);
-
-        const res = await axios.post("/api/user/signOut");
+        const res = await axios.post("/api/user/signout");
         console.log(res.data);
-        signOut();
         router.push("/");
     };
 
@@ -56,7 +50,7 @@ export default function UserProfile() {
                         Edit Profile
                     </button>
                     <button
-                        onClick={() => handleSignout}
+                        onClick={handleSignout}
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
                     >
                         Sign Out

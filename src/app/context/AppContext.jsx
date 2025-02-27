@@ -16,16 +16,20 @@ export const AppProvider = ({ children }) => {
     const [distance, setDistance] = useState(null);
     const [totalAmount, setTotalAmount] = useState(0);
     const [loading, setLoading] = useState(false);
-
-
-  const { data: session } = useSession()
-  console.log(session);
-
-  useEffect(() => { setUser(session?.user) }, [session])
-
-//   console.log(user);
-
     const router = useRouter()
+    const { data: session } = useSession()
+
+    // console.log(session);
+
+    useEffect(() => { setUser(session?.user) }, [session])
+
+    const getToken = async () => {
+        const res = await axios.get("/api/get-token");
+        console.log("token from get token : ", res.data);
+        // setUser(res.data)
+    }
+
+
 
     const userSignup = async () => {
         const res = await axios.post('/api/user/signup', {
@@ -202,7 +206,7 @@ export const AppProvider = ({ children }) => {
             distance, setDistance,
             totalAmount, setTotalAmount,
             carDetails, allRider,
-            loading, setLoading, session
+            loading, setLoading, session, getToken
         }}>
             {children}
         </AppContext.Provider>

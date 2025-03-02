@@ -5,7 +5,7 @@ export async function POST() {
     const cookieStore = cookies();
 
     const token = (await cookieStore).get("next-auth.session-token")
-                || (await cookieStore).get("__Secure-next-auth.session-token");
+        || (await cookieStore).get("__Secure-next-auth.session-token");
 
     if (!token) {
         return NextResponse.json({ error: "Session token not found" }, { status: 401 });

@@ -1,5 +1,4 @@
 'use client'
-
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
@@ -19,14 +18,14 @@ export const AppProvider = ({ children }) => {
     const router = useRouter()
     const { data: session } = useSession()
 
-    // console.log(session);
+    console.log("session data : ", session);
 
     useEffect(() => { setUser(session?.user) }, [session])
 
     const getToken = async () => {
         const res = await axios.get("/api/get-token");
         console.log("token from get token : ", res.data);
-        // setUser(res.data)
+        setUser(res.data)
     }
 
 

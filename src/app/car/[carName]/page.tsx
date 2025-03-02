@@ -1,6 +1,7 @@
 'use client'
 
 import { useAppContext } from '@/app/context/AppContext';
+import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -11,12 +12,12 @@ const Page = () => {
     const router = useRouter();
 
     useEffect(() => {
-        if (!user || user.length === 0) {
-            console.log('No user found, redirecting...');
-            setTimeout(() => router.push('/u/signin'), 5000);
-        } else {
-            setUserIsAuthenticated(true);
-        }
+        // if (!user || user.length === 0) {
+        //     console.log('No user found, redirecting...');
+        //     setTimeout(() => router.push('/u/signin'), 5000);
+        // } else {
+        setUserIsAuthenticated(true);
+        // }
     }, [user, router]);
 
     const car = carDetails.find((c: any) => c.name === carName);
@@ -39,15 +40,31 @@ const Page = () => {
                     )}
 
                     <div className="flex flex-col items-center mt-4">
+                        {/* {rider?.imageUrl ? (
+                            <Image
+                                src={rider.imageUrl}
+                                alt={rider?.riderName}
+                                width={50}
+                                height={50}
+                                className="rounded-full"
+                            />
+                        ) : (
+                            <div className="w-[50px] h-[50px] bg-gray-300 rounded-full flex items-center justify-center">
+                                No Image
+                            </div>
+                        )} */}
+
                         <p className="text-lg text-gray-700 dark:text-gray-300">
-                            Assigned Driver: <span className="font-semibold">{rider ? rider.riderName : 'N/A'}</span>
+                            Assigned Driver: <span className="font-semibold">{rider?.riderName}</span>
                         </p>
+
                         <p className="text-lg text-gray-700 dark:text-gray-300">
                             Total Cost: <span className="font-bold">${totalAmount.toFixed(2)}</span>
                         </p>
                     </div>
 
-                    <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-md">
+
+                    <button onClick={() => { console.log(car, rider) }} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-md">
                         Confirm Booking
                     </button>
                 </div>

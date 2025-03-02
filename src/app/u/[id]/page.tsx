@@ -1,8 +1,6 @@
 "use client";
 import { useAppContext } from "@/app/context/AppContext";
 import axios from "axios";
-import { signOut } from "next-auth/react";
-// import { cookies } from 'next/headers'
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -25,23 +23,19 @@ export default function UserProfile() {
 
     return (
         <div className="max-w-4xl mx-auto px-6 py-8">
-            {/* Profile Card */}
             <div className="text-white shadow-lg rounded-2xl p-6 flex flex-col items-center">
-                {/* Profile Picture */}
                 <div className="relative w-28 h-28">
                     <Image
-                        src={user?.image || "/default-avatar.png"}
+                        src={user?.image}
                         alt={user.name}
                         layout="fill"
                         className="rounded-full border border-gray-300"
                     />
                 </div>
 
-                {/* User Details */}
                 <h2 className="text-2xl font-bold mt-4">{user.name}</h2>
                 <p>{user.email}</p>
 
-                {/* Buttons */}
                 <div className="mt-4 flex space-x-4">
                     <button
                         onClick={handleEditProfile}
@@ -58,7 +52,6 @@ export default function UserProfile() {
                 </div>
             </div>
 
-            {/* Rental History */}
             <div className="mt-8">
                 <h3 className="text-xl font-semibold mb-4">Rental History</h3>
                 <div className="p-4 rounded-lg">
@@ -66,7 +59,6 @@ export default function UserProfile() {
                 </div>
             </div>
 
-            {/* Favorite Cars */}
             <div className="mt-8">
                 <h3 className="text-xl font-semibold mb-4">Your Favorite Cars</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">

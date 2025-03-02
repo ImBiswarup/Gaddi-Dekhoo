@@ -25,7 +25,7 @@ const Page = () => {
               height={50}
               width={50}
               src={user.image}
-              alt={user?.name || 'Profile'}
+              alt={user?.name}
               className="rounded-full mt-2"
             />
           )}

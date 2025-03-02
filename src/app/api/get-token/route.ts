@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
-    console.log("Decoded Token:", token);
+    // console.log("Decoded Token:", token);
 
     return NextResponse.json({ token });
 }

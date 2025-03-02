@@ -7,8 +7,9 @@ import Image from "next/image";
 import axios from "axios";
 
 export default function Navbar() {
-    const { user, getToken } = useAppContext()
+    const { user, getToken, session } = useAppContext()
     const [isOpen, setIsOpen] = useState(false);
+    const [tokenData, setTokenData] = useState([])
     const router = useRouter();
 
     useEffect(() => {
@@ -20,8 +21,13 @@ export default function Navbar() {
     //         const res = await axios.get("/api/get-token");
     //         // const data = await res.json();
 
-    //         if (res.data.token) {
-    //             console.log(res.data.token);
+    //         if (!res.data) {
+    //             console.log(res.data.error);
+    //         }
+
+    //         if (res.data) {
+    //             setTokenData(res.data.token);
+    //             console.log("decoded token data : ", tokenData);
     //         }
     //     };
 
@@ -57,7 +63,8 @@ export default function Navbar() {
                             </button>
                         </div>
                     ) : (
-                        <button onClick={() => router.push("/u/login")} className={`text-white dark:text-gray-300 ${isOpen ? "hidden" : "block"} bg-blue-500 px-4 py-2 rounded-md`}>
+                        <button
+                            className={`text-white dark:text-gray-300 ${isOpen ? "hidden" : "block"} bg-blue-500 px-4 py-2 rounded-md`}>
                             <AuthButton />
                         </button>
 
@@ -89,13 +96,13 @@ export default function Navbar() {
                     <button onClick={() => router.push("/contact")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">Contact</button>
                     {user ? (
                         <button
-                            onClick={() => router.push(`/u/${user._id}`)}
+                            onClick={() => router.push(`/u/${user?.id}`)}
                             className="block text-gray-700 dark:text-gray-300"
                         >
                             {user.name}
                         </button>
                     ) : (
-                        <button onClick={() => router.push("/u/login")} className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
+                        <button className="block text-gray-700 dark:text-gray-300 hover:text-blue-500">
                             <AuthButton />
                         </button>
                     )}

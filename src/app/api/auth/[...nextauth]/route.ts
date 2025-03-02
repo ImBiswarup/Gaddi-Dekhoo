@@ -48,13 +48,8 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET, // Important for security
-  // pages: {
-  //   signIn: "",
-  //   error: "/auth/error", // Error page
-  // },
+  secret: process.env.NEXTAUTH_SECRET
 };
 
-// Export NextAuth Handlers for App Router
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
